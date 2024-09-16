@@ -1,0 +1,19 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+www.hearingloss.org	TRUE	/	FALSE	1999999999	prli_click_4	membership
+www.hearingloss.org	TRUE	/	FALSE	1999999999	prli_visitor	66e54077276b3
+www.hearingloss.org	TRUE	/	FALSE	1999999999	prli_click_5	convention
+zoom.us	TRUE	/	FALSE	1999999999	_zm_ctaid	KZGpfMtMRoS1s2vuw3xn-g.1726300325902.e0fa030b5e6bed3947730b63e1e3c6b1
+zoom.us	TRUE	/	FALSE	1999999999	_zm_chtaid	461
+zoom.us	TRUE	/	FALSE	1999999999	_zm_mtk_guid	84d463f7b74e480ca6a92ba41e3a3f3a
+.zoom.us	TRUE	/	FALSE	1999999999	__cf_bm	s7fPeChiFsBdMuvXtv7Hrwzd5lqi9YYGWUau8nzeG0Q-1726300326-1.0.1.1-tkZiWpDJsvqyY8wyFJMjfGAAv_aW_2pXF61AVfYnKsABUd4ygLSE.XXUg1.7K.0ZkonKXJMaX.jey8wOWPPHuQ
+hearingloss.zoom.us	TRUE	/	FALSE	1999999999	SameSite	None
+bbox.blackbaudhosting.com	TRUE	/	FALSE	1999999999	NSC_QH-PMY	14b5a3d9f436ee3e8fe78eaf15a506b6854e17cf24ff56068ec064431b20eaafb7f0d207
+.www.asha.org	TRUE	/	FALSE	1999999999	__cf_bm	kz0cVVpuWou.B6Bj7a1pNqzW2ZS.OZxQ.kihPzw7J_Q-1726300740-1.0.1.1-LL_AH1IvqaAc_IuuBz_0znIkOwod.WFWiWXfqZGXp7vdb_E6NOrEw_6JCB0NRSbyXi4_9MhoExwRAaJqSrxe3Q
+www.asha.org	TRUE	/	FALSE	1999999999	SameSite	None
+www.hearingloss.org	TRUE	/	FALSE	1999999999	prli_click_34	otc101
+www.hearingloss.org	TRUE	/	FALSE	1999999999	prli_click_31	hearing-help%2Ftechnology%2Fotc-hearing-devices%2Fotc-hearing-aids
+www.hearingloss.org	TRUE	/	FALSE	1999999999	prli_click_30	hearing-help%2Ftechnology%2Fotc-hearing-devices%2Fotc-shopping-checklist
+www.hearingloss.org	TRUE	/	FALSE	1999999999	prli_click_40	make-an-impact%2Fbecome-a-member-renew
+www.hearingloss.org	TRUE	/	FALSE	1999999999	prli_click_41	make-an-impact%2Fdonate%2Fhlaa-donate-today
+
