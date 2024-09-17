@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat for Blind Users</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+    .chatContainer {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 10px;
+    }
+    .chatBox {
+      width: 48%;
+      height: 300px;
+      border: 1px solid #050505;
+      padding: 10px;
+      overflow-y: scroll;
+      background-color: #fff;
+    }
+    #realWorldChatBox {
+      background-color: #e1e1e1;
+    }
+    #messageInput {
+      width: 100%;
+      max-width: 600px;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    #sendBtn, #languageSelect {
+      padding: 10px 15px;
+      font-size: 16px;
+      border: none;
+      background-color: #5cb85c;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+    #languageSelect {
+      background-color: #007bff;
+    }
+    #startListeningBtn {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="chatContainer">
+    <div id="realWorldChatBox" class="chatBox">
+      <h2><b><u>HELPING HAND</u></b></h2>
+    </div>
+    <div id="blindChatBox" class="chatBox">
+      <h2><b><u>ADITYA</u></b></h2>
+    </div>
+  </div>
+
+  <input type="text" id="messageInput" placeholder="Type a message...">
+
+  <select id="languageSelect">
+    <option value="en-US">English (US)</option>
+    <option value="es-ES">Spanish (ES)</option>
+    <option value="fr-FR">French (FR)</option>
+    <option value="de-DE">German (DE)</option>
+    <option value="hi-IN">Hindi (IN)</option> <!-- Added Hindi option -->
+  </select>
+
+  <button id="sendBtn">Send</button>
+  <button id="startListeningBtn">Start Listening</button>
+
+  <script>
+    const realWorldChatBox = document.getElementById('realWorldChatBox');
+    const blindChatBox = document.getElementById('blindChatBox');
+    const messageInput = document.getElementById('messageInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const languageSelect = document.getElementById('languageSelect');
+    const startListeningBtn = document.getElementById('startListeningBtn');
+
+    let recognizing = false;
+    let recognition;
+
+    function appendRealWorldMessage(message) {
+      const messageElement = document.createElement('p');
+      messageElement.textContent = message;
+      realWorldChatBox.appendChild(messageElement);
+      realWorldChatBox.scrollTop = realWorldChatBox.scrollHeight; // Auto-scroll to the bottom
+    }
+
+    function appendBlindMessage(message) {
+      const messageElement = document.createElement('p');
+      messageElement.textContent = message;
+      blindChatBox.appendChild(messageElement);
+      blindChatBox.scrollTop = blindChatBox.scrollHeight; // Auto-scroll to the bottom
+    }
+
+    function speakMessage(message, language) {
+      const utterance = new SpeechSynthesisUtterance(message);
+      utterance.lang = language;
+      utterance.onend = () => {
+        if (recognition && !recognizing) {
+          recognition.start();
+        }
+      };
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function setupSpeechRecognition() {
+      if (!('webkitSpeechRecognition' in window)) {
+        alert('Speech recognition is not supported in this browser.');
+        return;
+      }
+
+      recognition = new webkitSpeechRecognition();
+      recognition.continuous = false;
+      recognition.interimResults = false;
+      recognition.lang = 'en-US'; // Default language
+
+      recognition.onstart = () => {
+        recognizing = true;
+        startListeningBtn.textContent = 'Listening...';
+      };
+
+      recognition.onend = () => {
+        recognizing = false;
+        startListeningBtn.textContent = 'Start Listening';
+      };
+
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        if (transcript) {
+          appendBlindMessage('Blind User: ' + transcript);
+          appendRealWorldMessage('Blind User: ' + transcript);
+          const selectedLanguage = languageSelect.value;
+          speakMessage(transcript, selectedLanguage);
+        }
+      };
+
+      recognition.onerror = (event) => {
+        console.error('Speech recognition error:', event.error);
+        alert('An error occurred with speech recognition: ' + event.error);
+      };
+
+      startListeningBtn.addEventListener('click', () => {
+        if (recognizing) {
+          recognition.stop();
+        } else {
+          recognition.start();
+        }
+      });
+    }
+
+    sendBtn.addEventListener('click', () => {
+      const message = messageInput.value;
+      const selectedLanguage = languageSelect.value;
+
+      if (message) {
+        appendRealWorldMessage('Real World: ' + message);
+        speakMessage(message, selectedLanguage);
+        messageInput.value = ''; // Clear the input
+      }
+    });
+
+    setupSpeechRecognition();
+  </script>
+
+</body>
+</html>
