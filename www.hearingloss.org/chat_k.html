@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title> MemeChat 2.0 </title>
+    <title>SARATHI CHAT</title>
     <!-- Google fonts. -->
     <link href='https://fonts.googleapis.com/css?family=Bungee Outline' rel='stylesheet'/>
     <link href='https://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet'/>
@@ -15,8 +15,31 @@
     <!-- The CSS and JS file must be declared after the things above-->
     <link rel="stylesheet" href="chatt_k1.css"/>
     <script type="text/javascript" src="chat_k2.js"></script>
+    <style>
+      /* CSS for positioning the button */
+      .redirect-button {
+          position: fixed; /* Keep the button fixed in place */
+          bottom: 20px; /* Distance from the bottom of the page */
+          left: 20px; /* Distance from the left side of the page */
+          padding: 10px 20px;
+          background-color: #4CAF50; /* Button color */
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          font-size: 16px;
+      }
 
+      /* Hover effect for the button */
+      .redirect-button:hover {
+          background-color: #45a049;
+      }
+  </style>
   </head>
   <body>
+    <!-- Anchor tag wrapping the button -->
+    <a href="text_speech.html" target="_blank">
+      <button type="button" class="redirect-button">Text To Speech</button>
+    </a>
   </body>
 </html>
