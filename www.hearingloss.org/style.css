@@ -1,0 +1,55 @@
+/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #add8e6; /* Slightly lighter grey for a softer look */
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px; /* Increased gap for better spacing */
+    width: 60%;
+    max-width: 1000px;
+    padding: 20px; /* Added padding for better alignment */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for container */
+    background-color: #808080; /* White background for the container */
+    border-radius: 12px; /* Rounded corners for the container */
+}
+
+.box {
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffffff; /* White background for each box */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for individual boxes */
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition effects */
+}
+
+.box:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+    transform: scale(1.03); /* Slight scale effect on hover */
+}
+
+.box img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.box:hover img {
+    transform: scale(1.1); /* Increased scale on hover */
+}
+
+.image-link {
+    display: block;
+    text-decoration: none;
+}

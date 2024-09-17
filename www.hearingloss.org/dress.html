@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Links to Audio</title>
+ <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+    <div class="container">
+        <div class="box" data-audio="tshirt.mp3">
+            <img src="tshirt.jpeg" alt="Dress">
+        </div>
+        <div class="box" data-audio="b tshirt.mp3">
+            <img src="b tshirt.jpeg" alt="Water">
+        </div>
+        <div class="box" data-audio="paint.mp3">
+            <img src="paint.jpeg" alt="Toys">
+        </div>
+        <div class="box" data-audio="shoes.mp3">
+            <img src="shoes.jpeg" alt="Hungry">
+        </div>
+        <div class="box" data-audio="kurta.mp3">
+            <img src="kurta.jpeg" alt="Sick">
+        </div>
+        <div class="box" data-audio="shirt.mp3">
+            <img src="shirt.jpeg" alt="Mummy">
+        </div>
+    </div>
+
+    <!-- Hidden audio element for playback -->
+    <audio id="audio-player" controls style="display: none;"></audio>
+
+    <script>
+        // JavaScript to handle audio playback
+        document.querySelectorAll('.box').forEach(box => {
+            box.addEventListener('click', () => {
+                const audioSrc = box.getAttribute('data-audio');
+                const audioPlayer = document.getElementById('audio-player');
+                
+                audioPlayer.src = audioSrc;
+                audioPlayer.play();
+            });
+        });
+    </script>
+</body>
+</html>
