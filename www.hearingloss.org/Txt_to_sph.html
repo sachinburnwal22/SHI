@@ -13,8 +13,37 @@
       justify-content: center;
       height: 100vh;
       margin: 0;
-      background-color: #f4f4f4;
+      background-color: #f0f0f5;
     }
+
+    .header {
+      margin-bottom: 40px;
+      text-align: center;
+      animation: headerAnimation 2s ease-in-out;
+    }
+
+    .header h1 {
+      font-size: 36px;
+      color: #007bff;
+      margin: 0;
+      transition: color 0.3s;
+    }
+
+    .header h1:hover {
+      color: #0056b3;
+    }
+
+    @keyframes headerAnimation {
+      from {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
     .chatContainer {
       display: flex;
       justify-content: space-between;
@@ -22,17 +51,57 @@
       max-width: 1200px;
       margin-bottom: 10px;
     }
+
     .chatBox {
       width: 48%;
-      height: 300px;
-      border: 1px solid #050505;
+      height: 400px;
       padding: 10px;
       overflow-y: scroll;
-      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+      border: 2px solid transparent;
+      background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
     }
+
+    .chatBox:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+      border-color: #007bff;
+    }
+
     #realWorldChatBox {
-      background-color: #e1e1e1;
+      border-color: #34b7f1;
     }
+
+    #blindChatBox {
+      border-color: #25d366;
+    }
+
+    #realWorldChatBox.active, #blindChatBox.active {
+      background-color: #000; /* Full black when active */
+      color: #fff; /* White text when active */
+    }
+
+    #realWorldChatBox h2, #blindChatBox h2 {
+      font-size: 24px;
+      color: inherit; /* Inherit color from parent */
+      text-align: center;
+      margin: 0;
+    }
+
+    .chatBoxLabel {
+      display: block;
+      width: 100%;
+      height: 40px;
+      background-color: #a8d5e2; /* Grayish green background color */
+      text-align: center;
+      line-height: 40px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
     #messageInput {
       width: 100%;
       max-width: 600px;
@@ -41,7 +110,15 @@
       border: 1px solid #ccc;
       border-radius: 5px;
       margin-bottom: 10px;
+      transition: all 0.3s ease;
     }
+
+    #messageInput:focus {
+      border-color: #007bff;
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
     #sendBtn, #languageSelect {
       padding: 10px 15px;
       font-size: 16px;
@@ -51,23 +128,39 @@
       cursor: pointer;
       border-radius: 5px;
       margin-right: 10px;
+      transition: background-color 0.3s;
     }
+
+    #sendBtn:hover, #languageSelect:hover {
+      background-color: #4cae4c;
+    }
+
     #languageSelect {
       background-color: #007bff;
     }
+
     #startListeningBtn {
       display: none;
+    }
+
+    /* Increase the spacing between the chat boxes */
+    .chatContainer .chatBox {
+      margin: 0 15px;
     }
   </style>
 </head>
 <body>
 
+  <div class="header">
+    <h1>Deaf-Blind Swar</h1>
+  </div>
+
   <div class="chatContainer">
     <div id="realWorldChatBox" class="chatBox">
-      <h2><b><u>HELPING HAND</u></b></h2>
+      <div class="chatBoxLabel">VOCALLY IMPAIRED</div>
     </div>
     <div id="blindChatBox" class="chatBox">
-      <h2><b><u>ADITYA</u></b></h2>
+      <div class="chatBoxLabel">VISUALLY IMPAIRED</div>
     </div>
   </div>
 
@@ -78,7 +171,7 @@
     <option value="es-ES">Spanish (ES)</option>
     <option value="fr-FR">French (FR)</option>
     <option value="de-DE">German (DE)</option>
-    <option value="hi-IN">Hindi (IN)</option> <!-- Added Hindi option -->
+    <option value="hi-IN">Hindi (IN)</option>
   </select>
 
   <button id="sendBtn">Send</button>
@@ -94,6 +187,11 @@
 
     let recognizing = false;
     let recognition;
+
+    function clearActiveChatBoxes() {
+      realWorldChatBox.classList.remove('active');
+      blindChatBox.classList.remove('active');
+    }
 
     function appendRealWorldMessage(message) {
       const messageElement = document.createElement('p');
@@ -144,10 +242,14 @@
       recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript;
         if (transcript) {
-          appendBlindMessage('Blind User: ' + transcript);
-          appendRealWorldMessage('Blind User: ' + transcript);
+          appendBlindMessage('Person 2: ' + transcript);
+          appendRealWorldMessage('Person 2: ' + transcript);
           const selectedLanguage = languageSelect.value;
           speakMessage(transcript, selectedLanguage);
+
+          // Activate blind chat box with full black background
+          clearActiveChatBoxes();
+          blindChatBox.classList.add('active');
         }
       };
 
@@ -170,9 +272,13 @@
       const selectedLanguage = languageSelect.value;
 
       if (message) {
-        appendRealWorldMessage('Real World: ' + message);
+        appendRealWorldMessage('Person 1: ' + message);
         speakMessage(message, selectedLanguage);
         messageInput.value = ''; // Clear the input
+
+        // Activate real world chat box with full black background
+        clearActiveChatBoxes();
+        realWorldChatBox.classList.add('active');
       }
     });
 
