@@ -1,177 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Accessibility Webpage with Voice Commands</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #000000;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #000000;
+      }
 
-        .container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-gap: 20px;
-            background-color: #d3d3d3;
-            padding: 20px;
-            border-radius: 10px;
-        }
+      .container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 20px;
+        background-color: #d3d3d3;
+        padding: 20px;
+        border-radius: 10px;
+      }
 
-        .button {
-            background-color: #295d92;
-            color: #ccff33;
-            padding: 60px 40px;
-            text-align: center;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 16px;
-        }
+      .button {
+        background-color: #295d92;
+        color: #ccff33;
+        padding: 60px 40px;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        clip-path: polygon(
+          30% 0%,
+          70% 0%,
+          100% 30%,
+          100% 70%,
+          70% 100%,
+          30% 100%,
+          0% 70%,
+          0% 30%
+        );
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 16px;
+      }
 
-        .button:hover {
-            background-color: #660066;
-        }
+      .button:hover {
+        background-color: #660066;
+      }
 
-        #voiceCommand {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 10px;
-            background-color: #003366;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+      #voiceCommand {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px;
+        background-color: #003366;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <div class="button" id="textToSpeech" onclick="voiceGuide('Text to Speech feature activated', 'text_speech.html')">
-            Text to Speech
-        </div> 
-        <div class="button" id="volunteerFeature" onclick="voiceGuide('Volunteer feature activated')">
-            Volunteer Feature
-        </div>
-        <div class="button" id="helpButton" onclick="voiceGuide('Help button activated')">
-            Help Button
-        </div>
-        <div class="button" id="signLanguageToSpeech" onclick="voiceGuide('Sign language to speech feature activated')">
-            Sign Language to Speech
-        </div>
-        <div class="button" id="chatFeature" onclick="voiceGuide('Chat feature activated')">
-            Chat Feature
-        </div>
-        <div class="button" id="chatBotFeature" onclick="voiceGuide('Chatbot feature activated')">
-            Chatbot Feature
-        </div>
+      <div
+        class="button"
+        id="textToSpeech"
+        onclick="voiceGuide('Text to Speech feature activated', 'text_speech.html')"
+      >
+        Text to Speech
+      </div>
+      <div
+        class="button"
+        id="volunteerFeature"
+        onclick="voiceGuide('Volunteer feature activated')"
+      >
+        Volunteer Feature
+      </div>
+      <div
+        class="button"
+        id="helpButton"
+        onclick="voiceGuide('Help button activated')"
+      >
+        Help Button
+      </div>
+      <div
+        class="button"
+        id="signLanguageToSpeech"
+        onclick="voiceGuide('Sign language to speech feature activated')"
+      >
+        Sign Language to Speech
+      </div>
+      <div
+        class="button"
+        id="chatFeature"
+        onclick="voiceGuide('Chat feature activated')"
+      >
+        Chat Feature
+      </div>
+      <div
+        class="button"
+        id="chatBotFeature"
+        onclick="voiceGuide('Chatbot feature activated')"
+      >
+        Chatbot Feature
+      </div>
     </div>
 
-    <button id="voiceCommand" onclick="startListening()">Start Voice Command</button>
+    <button id="voiceCommand" onclick="startListening()">
+      Start Voice Command
+    </button>
 
     <script>
-        // Function to trigger voice guidance for individual buttons
-        function voiceGuide(message, redirectUrl = null) {
-            const speech = new SpeechSynthesisUtterance(message);
-            speech.onend = function() {
-                if (redirectUrl) {
-                    window.location.href = redirectUrl;
-                }
-            };
-            window.speechSynthesis.speak(speech);
+      // Function to trigger voice guidance for individual buttons
+      function voiceGuide(message, redirectUrl = null) {
+        const speech = new SpeechSynthesisUtterance(message);
+        speech.onend = function () {
+          if (redirectUrl) {
+            window.location.href = redirectUrl;
+          }
+        };
+        window.speechSynthesis.speak(speech);
+      }
+
+      // List of available options (descriptions)
+      const availableOptions = [
+        "Text to Speech",
+        "Volunteer Feature",
+        "Help Button",
+        "Sign Language to Speech",
+        "Chat Feature",
+        "Chatbot Feature",
+      ];
+
+      // Speech Recognition for voice commands
+      const SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognition = new SpeechRecognition();
+
+      // Configure speech recognition
+      recognition.onstart = function () {
+        console.log("Voice recognition started.");
+        voiceGuide(
+          "Voice command is listening. Please speak the feature name."
+        );
+      };
+
+      recognition.onresult = function (event) {
+        const spokenWords = event.results[0][0].transcript.toLowerCase();
+        console.log("Recognized: ", spokenWords);
+
+        if (spokenWords.includes("text to speech")) {
+          document.getElementById("textToSpeech").click();
+        } else if (spokenWords.includes("volunteer")) {
+          document.getElementById("volunteerFeature").click();
+        } else if (spokenWords.includes("help")) {
+          document.getElementById("helpButton").click();
+        } else if (spokenWords.includes("sign language to speech")) {
+          document.getElementById("signLanguageToSpeech").click();
+        } else if (spokenWords.includes("chat feature")) {
+          document.getElementById("chatFeature").click();
+        } else if (spokenWords.includes("chatbot")) {
+          document.getElementById("chatBotFeature").click();
+        } else {
+          voiceGuide("Command not recognized, please try again.");
         }
-    
-        // List of available options (descriptions)
-        const availableOptions = [
-            'Text to Speech',
-            'Volunteer Feature',
-            'Help Button',
-            'Sign Language to Speech',
-            'Chat Feature',
-            'Chatbot Feature'
-        ];
-    
-        // Function to announce available options before voice command starts
-        function describeAvailableOptions() {
-            let message = "Available options are: ";
-            availableOptions.forEach(option => {
-                message += option + ", ";
-            });
-            voiceGuide(message);
-        }
-    
-        // Speech Recognition for voice commands
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        const recognition = new SpeechRecognition();
-    
-        // Configure speech recognition
-        recognition.onstart = function() {
-            console.log('Voice recognition started.');
-            voiceGuide('Voice command is listening. Please respond within 5 seconds.');
-            
-            // Delay 5 seconds before accepting voice input
-            setTimeout(() => {
-                recognition.start();
-            }, 5000); // 5 seconds delay before listening
-        };
-    
-        recognition.onresult = function(event) {
-            const spokenWords = event.results[0][0].transcript.toLowerCase();
-            console.log('Recognized: ', spokenWords);
-    
-            if (spokenWords.includes('text to speech')) {
-                document.getElementById('textToSpeech').click();
-            } else if (spokenWords.includes('volunteer')) {
-                document.getElementById('volunteerFeature').click();
-            } else if (spokenWords.includes('help')) {
-                document.getElementById('helpButton').click();
-            } else if (spokenWords.includes('sign language to speech')) {
-                document.getElementById('signLanguageToSpeech').click();
-            } else if (spokenWords.includes('chat feature')) {
-                document.getElementById('chatFeature').click();
-            } else if (spokenWords.includes('chatbot')) {
-                document.getElementById('chatBotFeature').click();
-            } else {
-                voiceGuide('Command not recognized, please try again.');
-            }
-        };
-    
-        recognition.onspeechend = function() {
-            recognition.stop();
-            voiceGuide('Voice command stopped.');
-        };
-    
-        recognition.onerror = function(event) {
-            voiceGuide('Error occurred in recognition: ' + event.error);
-        };
-    
-        // Function to start listening to voice commands
-        function startListening() {
-            // First describe the available options
-            describeAvailableOptions();
-    
-            // Delay the start of speech recognition to give time for the description to complete
-            setTimeout(() => {
-                voiceGuide('Voice command is listening. Please respond within 5 seconds.');
-                
-                // Provide a 5-second delay after announcing "Voice command is listening"
-                setTimeout(() => {
-                    recognition.start();  // Start listening after 5 seconds
-                }, 5000); // Adjust the delay based on the time for user input
-            }, 6000); // Adjust the initial delay for describing options
-        }
+      };
+
+      recognition.onspeechend = function () {
+        recognition.stop();
+        console.log("Voice recognition ended.");
+      };
+
+      recognition.onerror = function (event) {
+        voiceGuide("Error occurred in recognition: " + event.error);
+      };
+
+      // Function to start listening to voice commands
+      function startListening() {
+        // Start listening immediately
+        recognition.start();
+      }
     </script>
-    
-    
-</body>
+  </body>
 </html>
